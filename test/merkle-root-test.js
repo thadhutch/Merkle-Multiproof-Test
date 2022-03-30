@@ -13,13 +13,13 @@ describe("MerkleMultiProof Test", function () {
 
     describe("Verify Test", function () {
       it("should verify for valid merkle multiproof", async function () {
-        const leaves = ["a", "b", "c", "d", "e", "f"]
+        const leaves = ["0x8289d6a2eD28E4B52eDF32662ECd54e7033F76B1 100", "b", "c", "d", "e", "f"]
           .map(keccak256)
           .sort(Buffer.compare);
         const tree = new MerkleTree(leaves, keccak256, { sort: true });
 
         const root = tree.getRoot();
-        const proofLeaves = ["b", "f", "d"].map(keccak256).sort(Buffer.compare);
+        const proofLeaves = ["0x8289d6a2eD28E4B52eDF32662ECd54e7033F76B1 100", "c", "d"].map(keccak256).sort(Buffer.compare);
         const proof = tree.getMultiProof(proofLeaves);
         const proofFlags = tree.getProofFlags(proofLeaves, proof);
 
